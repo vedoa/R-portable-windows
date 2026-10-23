@@ -48,8 +48,9 @@ jobs:
           pattern: R-portable-*
           path: release-assets
           merge-multiple: true
-      - name: Attach archives to GitHub Release
+      - name: Attach archives to the pushed tag's GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.ref_name }}
           files: release-assets/*.zip
           fail_on_unmatched_files: true
