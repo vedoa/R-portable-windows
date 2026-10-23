@@ -4,7 +4,7 @@ Build isolated x64 Windows packages for R 4.6.1, R 4.5.3, and R 4.4.3. Each pack
 
 ## Production builds
 
-The production build logic is in `Build-PortableR.ps1` and `.github/workflows/build-portable-r.yml`. GitHub Actions builds all three versions on a `windows-latest` matrix when code is pushed to the `release` branch. Pushing any tag, with or without a `v` prefix (for example, `4.6.1`), also builds the archives and publishes them together to that tag's GitHub Release. Manual runs build only when started on the `release` branch or a tag.
+The production build logic is in `Build-PortableR.ps1` and `.github/workflows/build-portable-r.yml`. GitHub Actions builds all three versions on a `windows-latest` matrix when code is pushed to the `release` branch or when any tag is pushed. Release-branch runs upload versioned ZIPs as workflow artifacts. Tag runs also attach all three ZIPs to a GitHub Release named for the pushed tag, with or without a `v` prefix. Manual runs on the `release` branch create workflow artifacts; manual runs using a tag publish to that tag's Release.
 
 ## Local Sandbox testing
 
