@@ -40,7 +40,10 @@ jobs:
   release:
     name: Publish release assets
     needs: build
-    if: always() && needs.build.result == 'success' && startsWith(github.ref, 'refs/tags/')
+    # alway() prevents downstream skip cascades. 
+    # needs.build.result guarantees the matrix ran successfully.
+    # github.ref_type == 'tag' accurately verifies if it was a tag trigger.
+    if: always() && needs.build.result == 'success' && github.ref_type == 'tag'
     runs-on: windows-latest
     steps:
       - name: Download all version archives
