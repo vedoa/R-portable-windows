@@ -25,10 +25,12 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
       - name: Build portable R
         id: build
         shell: pwsh
         run: .\Build-PortableR.ps1 -RVersion $env:R_VERSION
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
@@ -38,8 +40,8 @@ jobs:
 
   release:
     name: Publish release assets
-    if: startsWith(github.ref, 'refs/tags/')
     needs: build
+    if: always() && needs.build.result == 'success' && startsWith(github.ref, 'refs/tags/')
     runs-on: windows-latest
     steps:
       - name: Download all version archives
@@ -48,6 +50,7 @@ jobs:
           pattern: R-portable-*
           path: release-assets
           merge-multiple: true
+
       - name: Attach archives to the pushed tag's GitHub Release
         uses: softprops/action-gh-release@v2
         with:
