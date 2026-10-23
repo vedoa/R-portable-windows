@@ -1,0 +1,2 @@
+# Ignore generated portable runtime directories from Sandbox tests.
+/R-portable-*/

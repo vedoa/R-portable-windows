@@ -1,0 +1,13 @@
+<Configuration>
+  <Networking>Default</Networking> 
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>C:\Users\va\Desktop\github\R-portable-windows\local</HostFolder>
+      <SandboxFolder>C:\R-portable-windows</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+  <LogonCommand>
+    <Command>cmd.exe /c start "Portable R test" powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -NoExit -Command "Set-Location -LiteralPath 'C:\R-portable-windows'; .\Test-PortableR.ps1"</Command>
+  </LogonCommand>
+</Configuration>
