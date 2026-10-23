@@ -37,6 +37,12 @@ jobs:
           path: .\R-portable-${{ matrix.r-version }}-*-x64.zip
           if-no-files-found: error
 
+      - name: Get short SHA
+        id: vars
+        shell: pwsh
+        run: |
+          "short_sha=$($env:GITHUB_SHA.Substring(0,7))" >> $env:GITHUB_OUTPUT
+
   release:
     name: Publish release assets
     needs: build
@@ -51,8 +57,9 @@ jobs:
           merge-multiple: true
 
       - name: Attach archives to the pushed tag's GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
-          tag_name: ${{ github.ref_name }}
+          name: Portable R ${{ github.ref_name }} (${{ steps.vars.outputs.short_sha }})
+          make_latest: true
           files: release-assets/*.zip
           fail_on_unmatched_files: true
