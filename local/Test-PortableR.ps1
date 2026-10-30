@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('4.6.1', '4.5.3', '4.4.3')]
-    [string]$RVersion = '4.6.1'
+    [ValidateSet('4.6.2', '4.5.3', '4.4.3')]
+    [string]$RVersion = '4.6.2'
 )
 
 $ErrorActionPreference = 'Stop'
